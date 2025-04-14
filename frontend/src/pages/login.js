@@ -46,8 +46,8 @@ export default function Login({ user: initialUser, login }) {
       setLoading(true);
       setError('');
       
-      // Make API call to login
-      const response = await axios.post('http://localhost:5000/api/auth/login', data);
+      // Make API call to login with the deployed backend URL
+      const response = await axios.post('https://parasassignment.onrender.com/api/auth/login', data);
       
       // Call the login function from _app.js to set the user in state and localStorage
       login(response.data.user);

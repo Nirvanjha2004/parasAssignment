@@ -195,7 +195,12 @@ if (fs.existsSync(booksRoutePath)) {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// Update CORS configuration to allow requests from the deployed frontend
+app.use(cors({
+  origin: ['https://shelf-mu.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 // Increase payload size limit for JSON requests (50MB)
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -215,6 +220,19 @@ if (bookRoutes) app.use('/api/books', bookRoutes);
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).send('Server is running');
+});
+
+// Add a root endpoint that provides API info
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Book Exchange API is running',
+    endpoints: {
+      auth: '/api/auth',
+      users: '/api/users',
+      books: '/api/books'
+    },
+    version: '1.0.0'
+  });
 });
 
 app.listen(PORT, () => {

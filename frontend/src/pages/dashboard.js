@@ -278,7 +278,7 @@ export default function Dashboard({ user: initialUser, logout }) {
 
       // Try API call first
       try {
-        await axios.delete(`http://localhost:5000/api/books/${selectedBook.id}`, {
+        await axios.delete(`https://parasassignment.onrender.com/api/books/${selectedBook.id}`, {
           data: { ownerId: user.id }
         });
       } catch (apiError) {
@@ -319,7 +319,7 @@ export default function Dashboard({ user: initialUser, logout }) {
       
       // Try API call but don't block UI
       try {
-        await axios.patch(`http://localhost:5000/api/books/${book.id}`, {
+        await axios.patch(`https://parasassignment.onrender.com/api/books/${book.id}`, {
           isAvailable: !book.isAvailable,
           ownerId: user.id
         });

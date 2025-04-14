@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // Create an axios instance with default config
+// Update the baseURL to point to the deployed backend
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://parasassignment.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
