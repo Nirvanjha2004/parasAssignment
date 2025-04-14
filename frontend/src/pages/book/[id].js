@@ -27,6 +27,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import axios from 'axios';
+// Import the API configuration
+import { API_BASE_URL, getApiUrl } from '../../utils/config';
 
 const theme = createTheme({
   palette: {
@@ -293,9 +295,9 @@ export default function BookDetails({ user: initialUser }) {
                           );
                           localStorage.setItem('books', JSON.stringify(updatedBooks));
                           
-                          // Try API update
+                          // Try API update using getApiUrl
                           try {
-                            await axios.patch(`http://localhost:5000/api/books/${book.id}`, {
+                            await axios.patch(getApiUrl(`/books/${book.id}`), {
                               isAvailable: !book.isAvailable,
                               ownerId: user.id
                             });

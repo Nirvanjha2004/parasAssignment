@@ -20,6 +20,8 @@ import {
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
+// Import the API configuration
+import { API_BASE_URL, getApiUrl } from '../utils/config';
 
 const theme = createTheme({
   palette: {
@@ -55,11 +57,11 @@ export default function Register({ user: initialUser, login }) {
       setLoading(true);
       setError('');
       
-      console.log('Sending registration request to:', 'http://localhost:5000/api/auth/register');
+      console.log('Sending registration request to:', getApiUrl('/auth/register'));
       console.log('Registration data:', data);
       
-      // Make API call to register
-      const response = await axios.post('http://localhost:5000/api/auth/register', data);
+      // Make API call to register using getApiUrl
+      const response = await axios.post(getApiUrl('/auth/register'), data);
       
       console.log('Registration successful:', response.data);
       

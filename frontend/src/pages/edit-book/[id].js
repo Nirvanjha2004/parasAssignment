@@ -24,6 +24,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
+import { API_BASE_URL, getApiUrl } from '../../utils/config';
 
 const theme = createTheme({
   palette: {
@@ -205,7 +206,7 @@ export default function EditBook({ user: initialUser }) {
       try {
         // Skip sending large image in API call to avoid payload issues
         const apiData = { ...data, ownerId: user.id };
-        await axios.patch(`http://localhost:5000/api/books/${book.id}`, apiData);
+        await axios.patch(getApiUrl(`/books/${book.id}`), apiData);
         console.log('Book updated in API');
       } catch (apiError) {
         console.error('API update failed, but local state is updated:', apiError);
